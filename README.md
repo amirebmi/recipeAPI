@@ -12,3 +12,6 @@
 - Handlebars view engine
 - MongoDB
 
+
+Please take a look at *recipes.js* at *routes* folder
+
