@@ -10,56 +10,51 @@ router.get('/', async function(req, res, next) {
 });
 
 // Search recipe names using MongoDB's text search.
-router.post('/search1', async function(req, res, next) {
+router.get('/recipeSearch', async function(req, res, next) {
 
     let recipes = await req.app.locals.db.collection("recipes");
 
     let textSearch = req.body.recipe;
 
-    const cursor = await recipes.find({$text: {$search: textSearch}}, {$caseSensitive: true});
+    const cursor = await recipes.find({$text: {$search: textSearch}});
 
     res.json(await cursor.toArray());
 });
 
 // Search recipes that use certain ingredients (for example "beef" and "potato").
-router.post('/search2', async function(req, res, next) {
+router.get('/ingredientSearch', async function(req, res, next) {
 
     let recipes = await req.app.locals.db.collection("recipes");
 
     // Get the complete parameters from the body
-    let bodyParamObject = req.body;
+    let bodyParamObject = req.body.ingredient;
 
-    // Create new arrays
+    // Create a new array
     const parameters = [];
 
     for (let item in bodyParamObject){
         parameters.push({ingredients:{ $regex: bodyParamObject[item] }})
     }
 
-    const crsr = await recipes.find({$and:parameters}, {_id:1,name:1});
+    const crsr = await recipes.find({$and:parameters});
 
     res.json(await crsr.toArray()); 
 });
 
 
 // Add a recipe
-router.post('/Add', async function(req, res, next){
+router.post('/', async function(req, res, next){
 
     let recipes = await req.app.locals.db.collection("recipes");
 
-    // Create a recipe object
-    const recipe = {
-        name: req.body.name,
-        yield: req.body.yield,
-        ingredients: req.body.ingredients,
-        directions: req.body.directions
-    }
+    // Get the JSON body 
+    const recipeObject = req.body;
 
     // Add the recipe object to the database
-    await recipes.insertOne(recipe);
+    await recipes.insertOne(recipeObject);
 
     // response Create status code and the object's Id
-    res.status(201).send(recipe._id);
+    res.status(201).send(recipeObject._id);
 });
 
 
