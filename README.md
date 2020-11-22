@@ -11,9 +11,7 @@
 - Express Framework
 - Handlebars view engine
 - MongoDB
+- Nodemon
 
-
-Please take a look at *recipes.js* at *routes* folder
-
-To run a test-request on each back-end, please use *recipeAPI-TestCases.postman_collection.JSON* and use it in Postman
+To run a test-request on each back-end, please import *recipeAPI-TestCases.postman_collection.JSON* in your Postman.
 
