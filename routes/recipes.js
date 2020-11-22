@@ -38,7 +38,7 @@ router.post('/search2', async function(req, res, next) {
 
     const crsr = await recipes.find({$and:parameters}, {_id:1,name:1});
 
-    res.json(await crsr.toArray());
+    res.json(await crsr.toArray()); 
 });
 
 
