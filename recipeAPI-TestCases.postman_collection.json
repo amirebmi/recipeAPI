@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "8d283131-5f05-402d-bd7f-1fc38eaa6668",
+		"name": "recipeAPI - Test Cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. List all recipes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Search recipe names using MongoDB's text search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "recipe",
+							"value": "garlic",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/recipes/recipeSearch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"recipes",
+						"recipeSearch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Search recipes that use certain ingredients (for example \"beef\" and \"potato\")",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ingredient",
+							"value": "olive",
+							"type": "text"
+						},
+						{
+							"key": "ingredient",
+							"value": "onion",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/recipes/ingredientSearch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"recipes",
+						"ingredientSearch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Add a recipe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Rustic Marinara Sauce\",\r\n    \"yield\": 6,\r\n    \"ingredients\": [\"1/2 cup olive oil\", \"2 white onions, diced\", \"8 cloves garlic, minced\", \"1 (28 ounce) can petite diced tomatoes\", \"1 (28 ounce) can diced tomatoes\", \"1 cup dry white wine\",\r\n                    \"1 (6 ounce) can tomato paste\", \"1 tablespoon dried oregano\", \"1/2 teaspoon salt\", \"1 cup freshly grated Pecorino-Romano cheese, divided\"],\r\n    \"directions\": [\"Heat olive oil in a large Dutch oven or heavy pot over medium heat; cook and stir onions for 5 minutes. Add garlic and cook, stirring occasionally, until onions are translucent,   about 5 minutes more.\", \r\n                \"Mix petite diced tomatoes, diced tomatoes, white wine, tomato paste, oregano, salt, sugar, black pepper, red pepper flakes, and bay leaves into onion mixture; reduce heat to low, cover Dutch oven, and simmer, stirring occasionally, until flavors blend, about 1 hour.\",\r\n                \"Remove Dutch oven from heat. Add 1/2 cup Pecorino-Romano cheese, basil, and parsley into into sauce; stir until cheese melts, about 5 minutes. Discard bay leaves. Sprinkle remaining cheese over sauce when serving.\"]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
